@@ -204,6 +204,13 @@ NAISTの「修士論文・課題研究の形式および電子ファイルの提
 
 MIT License
 
+## 貢献方法
+
+テンプレートへの貢献を歓迎します！詳細は[CONTRIBUTING.md](CONTRIBUTING.md)を参照してください。
+
+- バグ報告や機能要望: [GitHub Issues](https://github.com/HOgishima/naistQmd/issues)
+- プルリクエスト: [CONTRIBUTING.md](CONTRIBUTING.md)の手順に従ってください
+
 ## 不具合報告
 
 不具合や改善提案があれば、Issueで報告してください。
