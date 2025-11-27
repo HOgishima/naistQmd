@@ -276,6 +276,15 @@ to\hsize{\hfil\box\@tempboxa\hfil}
 }
 \makeatother
 
+% Explicitly redefine subsubsection to ensure it is visible
+\makeatletter
+\renewcommand{\subsubsection}{\@startsection{subsubsection}{3}{\z@}%
+    {3.5ex plus 1ex minus .2ex}%
+    {2.3ex plus .2ex}%
+    {\normalfont\normalsize\bfseries}}
+\makeatother
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -365,7 +374,7 @@ to\hsize{\hfil\box\@tempboxa\hfil}
 
 \title{太陽と月を利用した\(\pi\)の低速計算アルゴリズムに関する理論的研究}
 \author{田中　研太郎}
-\date{2025-11-27}
+\date{2025-11-28}
 
 \begin{document}
 \maketitle
@@ -378,9 +387,6 @@ to\hsize{\hfil\box\@tempboxa\hfil}
 
 % 目次（NAISTフォーマット）
 \toc
-% \tocコマンドがtocdepthを2に設定する可能性があるため、再設定
-\setcounter{tocdepth}{3}
-
 % 図目次と表目次
 \newpage
 \listoffigures
@@ -389,13 +395,6 @@ to\hsize{\hfil\box\@tempboxa\hfil}
 % 本文開始
 \newpage
 \pagenumbering{arabic}
-
-% secnumdepthを設定（Quartoのnumber-depth変数を使用）
-% \titlepage、\cmemberspage、\tocなどのコマンドの後に設定することで、
-% これらのコマンドがsecnumdepthを上書きした場合でも確実に3に設定される
-% 本文が始まる直前に設定することで、subsubsectionの番号が確実に表示される
-% _extension.ymlでnumber-depth: 3が設定されているので、デフォルトは3
-\setcounter{secnumdepth}{3}
 
 
 \section{はじめに}\label{ux306fux3058ux3081ux306b}
@@ -411,7 +410,7 @@ to\hsize{\hfil\box\@tempboxa\hfil}
 
 \subsection{過去における研究}\label{sec-kako}
 
-\begin{figure}[p]
+\begin{figure}[htbp]
 
 \caption{\label{fig-CNN}Convolutional Neural Network (CNN)}
 
@@ -423,11 +422,33 @@ to\hsize{\hfil\box\@tempboxa\hfil}
 
 \end{figure}%
 
-過去における研究としては\autocite{alex_nips12}などがある。
+過去における研究としては\autocite{alex_nips12}などがある。Figure ~\ref{fig-CNN}
+に示すように、CNNの構造は複雑である。
 
-過去における研究 過去における研究 過去における研究 過去における研究
-過去における研究 過去における研究 過去における研究 過去における研究
-過去における研究 過去における研究 過去における研究
+数式の表示を確認するため、いくつかの例を示す。インライン数式の例として、相関係数は
+\(r = 0.85\) であった。また、平均値は \(\mu = 100\)、標準偏差は
+\(\sigma = 15\) である。
+
+ディスプレイ数式（番号付き）の例として、オイラーの公式は以下のように表される：
+
+\begin{equation}\phantomsection\label{eq-euler}{
+e^{i\pi} + 1 = 0
+}\end{equation}
+
+Equation~\ref{eq-euler}
+は数学において最も美しい公式の一つとして知られている。
+
+また、zスコアの計算式は Equation~\ref{eq-zscore} で示される：
+
+\begin{equation}\phantomsection\label{eq-zscore}{
+z = \frac{X - \mu}{\sigma}
+}\end{equation}
+
+番号なしのディスプレイ数式の例として、標準誤差は以下のように計算される：
+
+\[
+\sigma_e = \sigma_y \sqrt{1 - r_{xy}^2}
+\]
 
 \subsubsection{先行研究での知見1}\label{ux5148ux884cux7814ux7a76ux3067ux306eux77e5ux898b1}
 
@@ -465,7 +486,7 @@ to\hsize{\hfil\box\@tempboxa\hfil}
 
 \subsection{実験材料・装置・刺激}\label{ux5b9fux9a13ux6750ux6599ux88c5ux7f6eux523aux6fc0}
 
-\begin{figure}[p]
+\begin{figure}[htbp]
 
 \caption{\label{fig-muller-lyer}ミュラー・リヤー錯視の例}
 
@@ -477,6 +498,9 @@ to\hsize{\hfil\box\@tempboxa\hfil}
 
 \end{figure}%
 
+Figure ~\ref{fig-muller-lyer}
+は、ミュラー・リヤー錯視の典型的な例を示している。
+
 \subsection{統計解析}\label{ux7d71ux8a08ux89e3ux6790}
 
 　統計解析は，macOS 15.3.1上で，R version 4.3.3
@@ -486,11 +510,15 @@ to\hsize{\hfil\box\@tempboxa\hfil}
 
 \subsection{記述統計}\label{ux8a18ux8ff0ux7d71ux8a08}
 
+Table ~\ref{tbl-descriptive} に、Big Five因子の記述統計量を示す。
+
 \begin{table}
 
-\caption{Big Five因子の記述統計量}
-\centering
-\begin{tabular}[t]{lrrrrrrrr}
+\caption{\label{tbl-descriptive}Big Five因子の記述統計量}
+
+\centering{
+
+\begin{tabular}{lrrrrrrrr}
 \toprule
   & n & Mean & SD & Median & Min & Max & Skewness & kurtosis\\
 \midrule
@@ -502,11 +530,16 @@ Openness & 2726 & 19.34 & 2.74 & 19 & 5 & 29 & -0.02 & 1.09\\
 \bottomrule
 \multicolumn{9}{l}{\textsuperscript{} Note. SD=standard deviation}\\
 \end{tabular}
-\end{table}
+
+}
+
+\end{table}%
 
 \subsection{メインの解析の前提となる解析}\label{ux30e1ux30a4ux30f3ux306eux89e3ux6790ux306eux524dux63d0ux3068ux306aux308bux89e3ux6790}
 
 \subsubsection{変数間の相関係数}\label{ux5909ux6570ux9593ux306eux76f8ux95a2ux4fc2ux6570}
+
+変数間の相関係数を以下に示す。
 
 \renewcommand{\arraystretch}{1}
 \begin{landscape}\begin{table}
@@ -550,11 +583,15 @@ Variable & $N$ & $M$ & $SD$ & 1 & 2 & 3 & 4\\
 
 \subsubsection{ヒストグラム}\label{ux30d2ux30b9ux30c8ux30b0ux30e9ux30e0}
 
-\begin{figure}[H]
+神経症傾向の分布を Figure ~\ref{fig-histogram} に示す。
 
-\caption{\label{fig:figs}神経症傾向のヒストグラム}
+\begin{figure}[htbp]
 
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-pdf/unnamed-chunk-4-1.pdf}}
+\caption{\label{fig-histogram}神経症傾向のヒストグラム}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-pdf/fig-histogram-1.pdf}}
 
 }
 
@@ -565,13 +602,16 @@ Variable & $N$ & $M$ & $SD$ & 1 & 2 & 3 & 4\\
 神経症傾向に関して性差を検討したところ,男性(\emph{M} = 14.74, \emph{SD}
 = 5.72)よりも、女性(\emph{M} = 16.35, \emph{SD} =
 6.03)の方が有意に神経症傾向が高かった(\emph{t} (1853.20) = 6.77,
-\emph{p} = 0.00 , \emph{d} = 0.27,95 \%CI {[}0.19, 0.35{]})。
+\emph{p} = 0.00 , \emph{d} = 0.27,95 \%CI {[}0.19, 0.35{]})。この結果を
+Figure ~\ref{fig-figs} に示す。
 
-\begin{figure}[H]
+\begin{figure}
 
-\caption{\label{fig:figs}神経症傾向の平均と}
+\caption{\label{fig-figs}神経症傾向の平均と標準誤差}
 
-{\centering \pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-pdf/figs-1.pdf}}
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-pdf/fig-figs-1.pdf}}
 
 }
 
@@ -581,9 +621,11 @@ Variable & $N$ & $M$ & $SD$ & 1 & 2 & 3 & 4\\
 
 \begin{table}
 
-\caption{性別と教育歴についてのクロス集計表}
-\centering
-\begin{tabular}[t]{lrr}
+\caption{\label{tbl-contingency}性別と教育歴についてのクロス集計表}
+
+\centering{
+
+\begin{tabular}{lrr}
 \toprule
 \multicolumn{1}{c}{ } & \multicolumn{2}{c}{Education} \\
 \cmidrule(l{3pt}r{3pt}){2-3}
@@ -595,14 +637,20 @@ Variable & $N$ & $M$ & $SD$ & 1 & 2 & 3 & 4\\
 \hspace{1em}Male & 93 & 745\\
 \bottomrule
 \end{tabular}
-\end{table}
+
+}
+
+\end{table}%
 
 女性より、男性の方が高学歴者が多いことが示唆された( \(\chi ^2\) (1.00,
-\emph{N} = 2800) = 8.61, \emph{p} = 0.00)。
+\emph{N} = 2800) = 8.61, \emph{p} = 0.00)。詳細は
+Table ~\ref{tbl-contingency} を参照されたい。
 
 \subsection{メインの解析の記載}\label{ux30e1ux30a4ux30f3ux306eux89e3ux6790ux306eux8a18ux8f09}
 
 \subsubsection{重回帰分析}\label{ux91cdux56deux5e30ux5206ux6790}
+
+重回帰分析の結果を以下に示す。
 
 \renewcommand{\arraystretch}{1}
 \begin{landscape}\begin{table}
@@ -631,6 +679,8 @@ airplay & 3.59** & {}[3.02, 4.15] & 0.55 & {}[0.46, 0.63] & .29** & {}[.20, .38]
 \renewcommand{\arraystretch}{1}
 
 \subsubsection{分散分析の結果}\label{ux5206ux6563ux5206ux6790ux306eux7d50ux679c}
+
+分散分析の結果を以下に示す。
 
 \renewcommand{\arraystretch}{1}\begin{table}
 
@@ -692,10 +742,182 @@ Thank you. Thank you.
 これはおまけです。これはおまけです。これはおまけです。これはおまけです。
 これはおまけです。これはおまけです。これはおまけです。これはおまけです。
 
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <e3>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <81>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <93>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <e3>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <82>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <8c>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <e3>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <81>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <af>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <e3>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <81>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <8a>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <e3>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <81>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <be>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <e3>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <81>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <91>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <e3>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <81>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <ae>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <e5>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <9b>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <b3>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <e3>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <81>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <a7>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <e3>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <81>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <99>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <e3>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <80>
+\end{verbatim}
+
+\begin{verbatim}
+Warning in title(...): conversion failure on 'これはおまけの図です。' in
+'mbcsToSbcs': dot substituted for <82>
+\end{verbatim}
+
 \begin{figure}
-\centerline{これはおまけの図です。}
-\caption{おまけの図}
-\end{figure}
+
+\caption{\label{fig-omake}おまけの図}
+
+\centering{
+
+\pandocbounded{\includegraphics[keepaspectratio]{paper_files/figure-pdf/fig-omake-1.pdf}}
+
+}
+
+\end{figure}%
 
 \subsection{おまけその２}\label{ux304aux307eux3051ux305dux306euxff12}
 
