@@ -7,8 +7,8 @@
 これはおまけです。これはおまけです。これはおまけです。これはおまけです。
 これはおまけです。これはおまけです。これはおまけです。これはおまけです。
 
-```{r fig-omake, echo=FALSE, message=FALSE, fig.cap="おまけの図"}
-plot(1:5, 1:5, main = "これはおまけの図です。")
+```{r fig-omake, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="おまけの図"}
+plot(1:5, 1:5)
 ```
 
 ## おまけその２
