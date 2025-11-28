@@ -38,6 +38,10 @@ __pycache__/
 .vscode/
 .idea/
 
+# Microsoft Office一時ファイル
+~$*
+*.tmp
+
 
 /.quarto/
 
