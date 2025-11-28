@@ -1,0 +1,30 @@
+# これは例です。project_xxレポジトリに配置してください
+name: Sync naistQmd updates
+
+on:
+  schedule:
+    # 毎日午前2時にチェック（任意の時間に変更可能）
+    - cron: '0 2 * * *'
+  workflow_dispatch: # 手動実行も可能
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Setup Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      
+      - name: Pull naistQmd updates
+        run: |
+          git subtree pull --prefix=naistQmd https://github.com/HOgishima/naistQmd.git main --squash -m "Auto-sync: Update naistQmd template"
+      
+      - name: Push changes
+        run: |
+          git push origin main
+

@@ -127,8 +127,8 @@ crossref:
   subref-labels: alpha A
 
 bibliography: 
-  - bibliography-jp.bib
-  - bibliography-en.bib
+  - references/bibliography-jp.bib
+  - references/bibliography-en.bib
 
 format:
   apaquarto-docx: 

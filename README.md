@@ -102,14 +102,16 @@ Quarto Previewでも`post-render`が実行され、ファイル変更を監視�
 
 ### 4. 参考文献
 
-`bibliography-en.bib`（英語）と`bibliography-jp.bib`（日本語）に参考文献をBibTeX形式で追加してください。
+`references/bibliography-en.bib`（英語）と`references/bibliography-jp.bib`（日本語）に参考文献をBibTeX形式で追加してください。
 
 ## プロジェクト構造
 
 ```
 naistQmd/
 ├── paper.qmd              # メインドキュメント（編集するファイル）
-├── bibliography-*.bib     # 参考文献データベース（日本語・英語）
+├── references/            # 参考文献データベース
+│   ├── bibliography-jp.bib  # 日本語文献（手動管理）
+│   └── bibliography-en.bib  # 英語文献（Zotero自動エクスポート）
 ├── figures/               # 図ファイル
 ├── README.md              # プロジェクト説明
 │
@@ -213,10 +215,10 @@ MIT License
 
 ## 貢献方法
 
-テンプレートへの貢献を歓迎します！詳細は[CONTRIBUTING.md](CONTRIBUTING.md)を参照してください。
+テンプレートへの貢献を歓迎します！詳細は[CONTRIBUTING.md](docs/CONTRIBUTING.md)を参照してください。
 
 - バグ報告や機能要望: [GitHub Issues](https://github.com/HOgishima/naistQmd/issues)
-- プルリクエスト: [CONTRIBUTING.md](CONTRIBUTING.md)の手順に従ってください
+- プルリクエスト: [CONTRIBUTING.md](docs/CONTRIBUTING.md)の手順に従ってください
 
 ## 不具合報告
 

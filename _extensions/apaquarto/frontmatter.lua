@@ -35,7 +35,7 @@ end
 
 -- Check if meta is present or if it has length of 0
 local function chkmeta(meta_item)
-  ispresent = false
+  local ispresent = false
   if meta_item then
     if #meta_item > 0 then
       ispresent = true
