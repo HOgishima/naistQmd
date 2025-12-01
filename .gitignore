@@ -25,6 +25,8 @@ jpa.bbx
 jpa.cbx
 jpa.dbx
 biblatex-dm.cfg
+# template/フォルダ内のファイルは例外として追跡する
+!template/
 
 # Python
 __pycache__/
